@@ -11,7 +11,7 @@ const prisma = new PrismaClient();
 const GOOGLE_ID = process.env.GOOGLE_ID;
 const googleClient = new OAuth2Client(GOOGLE_ID);
 
-const authServices = {
+const userService = {
     signUp: async (
         _: any,
         { email, password }: { email: string; password: string }
@@ -185,5 +185,5 @@ const authServices = {
 };
 
 module.exports = {
-    authService: authServices,
+    userService,
 };

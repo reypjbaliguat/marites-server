@@ -1,30 +1,6 @@
 const { makeExecutableSchema } = require('@graphql-tools/schema');
-const { resolvers } = require('./resolvers');
-
-const typeDefs = `
-  type User {
-    id: ID!
-    email: String!
-    role: String!
-    token: String
-    otpCode: String
-    otpExpires: String
-    isVerified: Boolean!
-    lastOtpRequest: String
-    createdAt: String!
-    updatedAt: String!
-  }
-  type Query {
-    _dummy: String
-  }
-  type Mutation {
-    signUp(email: String!, password: String!): String
-    login(email: String!, password: String!): User!
-    googleLogin(token: String!): User!
-    verifyOTP(email: String!, otpCode: String!): User
-    resendOTP(email: String!): String
-  }
-`;
+const resolvers = require('./resolvers');
+const typeDefs = require('./typeDefs');
 
 const schema = makeExecutableSchema({ typeDefs, resolvers });
 module.exports = {
