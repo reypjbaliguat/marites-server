@@ -1,22 +1,15 @@
-// In-memory storage for messages
-let messages: {
-    id: string;
-    user: string;
-    content: string;
-}[] = [];
+const { messageService } = require('../../services/messageService');
 
-const messageResolvers = {
-    Query: {
-        messages: () => messages,
-    },
-    Mutation: {
-        sendMessage: (_, { user, content }) => {
-            const message = { id: String(messages.length + 1), user, content };
-            messages.push(message);
-            // io.emit('message', message);
-            return message;
+const messageResolvers = (io) => {
+    const service = messageService(io);
+    return {
+        Query: {
+            messages: () => service.messages,
         },
-    },
+        Mutation: {
+            sendMessage: service.sendMessage,
+        },
+    };
 };
 
 module.exports = {

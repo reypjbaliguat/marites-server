@@ -5,7 +5,7 @@ type Message {
 }
 
 type Query {
-    messages: [Message!]
+    messages: [Message]
 }
 
 type Mutation {
