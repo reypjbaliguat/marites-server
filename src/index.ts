@@ -2,8 +2,12 @@ import { GraphQLError } from 'graphql';
 
 const { createYoga } = require('graphql-yoga');
 const { createServer } = require('http');
-const { schema } = require('./graphql/schema');
 const { context } = require('./graphql/context');
+const { makeExecutableSchema } = require('@graphql-tools/schema');
+const resolvers = require('./graphql/resolvers');
+const typeDefs = require('./graphql/typeDefs');
+
+const schema = makeExecutableSchema({ typeDefs, resolvers });
 
 const yoga = createYoga({
     schema,
