@@ -1,20 +1,12 @@
-// In-memory storage for messages
-let messages: {
-    id: string;
-    user: string;
-    content: string;
-}[] = [];
+const { prisma } = require('../context');
 
-const messageService = (io) => ({
-    messages: () => messages,
-    sendMessage: ({ user, content }) => {
-        const message = { id: String(messages.length + 1), user, content };
-        messages.push(message);
-        io.emit('message', message);
-        return message;
-    },
-});
+const createMessage = async (senderId, content) => {
+    if (!content) throw new Error('Message cannot be empty');
+    return await prisma.message.create({
+        data: { senderId, content },
+    });
+};
 
 module.exports = {
-    messageService,
+    createMessage,
 };

@@ -1,6 +1,6 @@
 const { userService } = require('../../services/userService');
 
-const userResolvers = {
+const userResolver = {
     Query: {
         _dummy: String,
     },
@@ -14,5 +14,5 @@ const userResolvers = {
 };
 
 module.exports = {
-    userResolvers,
+    userResolver,
 };
